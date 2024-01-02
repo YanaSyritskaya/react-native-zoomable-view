@@ -518,27 +518,7 @@ class ReactNativeZoomableView extends Component<
       this.gestureType = 'pinch';
       this._handlePinching(e, gestureState);
     } else if (gestureState.numberActiveTouches === 1) {
-      if (
-        this.longPressTimeout &&
-        (Math.abs(gestureState.dx) > 5 || Math.abs(gestureState.dy) > 5)
-      ) {
-        clearTimeout(this.longPressTimeout);
-        this.longPressTimeout = null;
-      }
-      // change some measurement states when switching gesture to ensure a smooth transition
-      if (this.gestureType !== 'shift') {
-        this.lastGestureCenterPosition = calcGestureCenterPoint(
-          e,
-          gestureState
-        );
-      }
 
-      const { dx, dy } = gestureState;
-      const isShiftGesture = Math.abs(dx) > 2 || Math.abs(dy) > 2;
-      if (isShiftGesture) {
-        this.gestureType = 'shift';
-        this._handleShifting(gestureState);
-      }
     }
   };
 
